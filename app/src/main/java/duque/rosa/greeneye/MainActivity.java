@@ -13,9 +13,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.MultipartBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class MainActivity extends AppCompatActivity {
 
-    ImageView foto;
+    List<MultipartBody.Part> imagem = new ArrayList<>();
+    PlantaService service;
     private static final String BASE_URL = "https://my-api.plantnet.org/";
     private static final String API_KEY = "YOUR-API-KEY";
 
@@ -23,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        foto = findViewById(R.id.foto);
+
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 0);
         }
@@ -33,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        PlantaService service = retrofit.create(PlantaService.class);
+        service = retrofit.create(PlantaService.class);
     }
 
     public void tirarFoto(View view){
@@ -47,9 +58,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
-            foto.setImageBitmap(bitmap);//substituir pelo uso de api
 
-            Call<PlantNetResponse> call = service.identificarPlanta("all", API_KEY, images, organs);
+            Call<PlantNetResponse> call = service.identificarPlanta("all", API_KEY, imagem);
             call.enqueue(new Callback<PlantNetResponse>() {
                 @Override
                 public void onResponse(Call<PlantNetResponse> call, Response<PlantNetResponse> response) {
@@ -58,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
                         // Processar o resultado
                     }
                 }
+
+                @Override
+                public void onFailure(Call<PlantNetResponse> call, Throwable t) {
+
+                }
+            });
         }
-    }
-}
+    }}
