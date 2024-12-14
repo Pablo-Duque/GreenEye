@@ -4,28 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00B69F"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_width="172dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#A64B30"
         android:onClick="tirarFoto"
         android:text="Tirar Foto"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foto" />
+        app:layout_constraintTop_toBottomOf="@+id/icone" />
 
     <ImageView
-        android:id="@+id/foto"
+        android:id="@+id/icone"
         android:layout_width="312dp"
         android:layout_height="457dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/icone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
