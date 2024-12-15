@@ -1,8 +1,5 @@
 package duque.rosa.greeneye;
 
-import android.content.Context;
-import android.widget.Toast;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
