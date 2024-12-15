@@ -15,6 +15,7 @@
         android:backgroundTint="#A64B30"
         android:onClick="tirarFoto"
         android:text="Tirar Foto"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,11 +25,24 @@
         android:id="@+id/icone"
         android:layout_width="312dp"
         android:layout_height="457dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/help"
+        app:srcCompat="@drawable/icone"
         tools:srcCompat="@drawable/icone" />
+
+    <ImageButton
+        android:id="@+id/help"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/help"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_question_mark_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
