@@ -27,10 +27,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-
-    File imagem;
     PlantaService service;
-    private File arquivoImagem;
+    File arquivoImagem;
     private static final String BASE_URL = "https://my-api.plantnet.org/";
     private static final String API_KEY = "2b10stuOqFgy1AUXtr2xdhFHf";
 
@@ -83,10 +81,9 @@ public class MainActivity extends AppCompatActivity {
         try {
             if (requestCode == 1 && resultCode == RESULT_OK) {
                 if (arquivoImagem != null && arquivoImagem.exists()) {
-                    imagem = new File(arquivoImagem.getAbsolutePath());
 
-                    RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), imagem);
-                    MultipartBody.Part imagePart = MultipartBody.Part.createFormData("images", imagem.getName(), imageBody);
+                    RequestBody imageBody = RequestBody.create(MediaType.parse("image/*"), arquivoImagem);
+                    MultipartBody.Part imagePart = MultipartBody.Part.createFormData("images", arquivoImagem.getName(), imageBody);
 
                     Call<ConjuntoEspecies> call = service.identificarPlanta("all", API_KEY, imagePart);
                     call.enqueue(new Callback<ConjuntoEspecies>() {
