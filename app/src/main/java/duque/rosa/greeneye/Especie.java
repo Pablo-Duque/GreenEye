@@ -1,40 +1,47 @@
 package duque.rosa.greeneye;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Especie {
-    @SerializedName("scientificNameWithoutAuthor")
-    private String nomeCientifico;
+    @SerializedName("species")
+    private JsonObject species;
 
     @SerializedName("score")
     private double acerto;
 
-    @SerializedName("commonNames")
-    private List<String> nomeConhecido;
-
     public String getNomeCientifico() {
-        return nomeCientifico;
+        if (species != null && species.has("scientificNameWithoutAuthor")) {
+            return species.get("scientificNameWithoutAuthor").getAsString();
+        }
+        return null;
     }
 
-    public void setNomeCientifico(String nomeCientifico) {
-        this.nomeCientifico = nomeCientifico;
+    public void setSpecies(JsonObject species) {
+        this.species = species;
     }
 
-    public List<String> getNomeConhecido() {
-        return nomeConhecido;
+    public String getNomeConhecido() {
+        if (species != null && species.has("commonNames")) {
+            JsonArray commonNames = species.getAsJsonArray("commonNames");
+            if (commonNames != null && commonNames.size() > 0) {
+                return commonNames.get(0).getAsString();
+            }
+        }
+        return null;
     }
 
-    public void setNomeConhecido(List<String> nomeConhecido) {
-        this.nomeConhecido = nomeConhecido;
-    }
+
+
+
 
     public double getAcerto() {
         return acerto;
     }
 
-    public void setAcerto(double acerto) {
-        this.acerto = acerto;
-    }
+
 }

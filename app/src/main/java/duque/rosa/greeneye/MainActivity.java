@@ -1,10 +1,12 @@
 package duque.rosa.greeneye;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                                 Intent intencaoResultado = new Intent(getApplicationContext(), Resultado.class);
                                 intencaoResultado.putExtra("acerto", resultado.getResultado().get(0).getAcerto());
                                 intencaoResultado.putExtra("nomeCientifico", resultado.getResultado().get(0).getNomeCientifico());
+                                intencaoResultado.putExtra("nomeConhecido", resultado.getResultado().get(0).getNomeConhecido());
                                 startActivity(intencaoResultado);
                             } else {
                                 Toast.makeText(MainActivity.this, "Erro na identificação da planta", Toast.LENGTH_LONG).show();
@@ -110,4 +113,29 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Erro ao processar imagem: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-    }}
+    }
+
+    public void help(View view){
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+        dialog.setTitle("Como utilizar");
+        dialog.setMessage("1. Clique em 'tirar foto'\n2. Tire a foto da planta que deseje indentificar\n3. Veja o resultado");
+
+        dialog.setCancelable(false);
+
+        dialog.setIcon(R.drawable.icone);
+
+        dialog.setPositiveButton("Entendi", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.create();
+        dialog.show();
+
+    }
+
+}
